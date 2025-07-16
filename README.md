@@ -77,10 +77,10 @@ For creating a MySQL InnoDB Cluster, first create a secret with credentials for 
 perform administrative tasks in the cluster. For example:
 
 ```sh
-$> kubectl create secret generic mypwds \
+$> kubectl create secret generic -n mysql-operator mypwds \
         --from-literal=rootUser=root \
         --from-literal=rootHost=% \
-        --from-literal=rootPassword="sakila"
+        --from-literal=rootPassword="123456"
 ```
 
 Define your MySQL InnoDB Cluster, which references the secret. For example:
@@ -90,6 +90,7 @@ apiVersion: mysql.oracle.com/v2
 kind: InnoDBCluster
 metadata:
   name: mycluster
+  namespace: mysql-operator
 spec:
   secretName: mypwds
   tlsUseSelfSigned: true
