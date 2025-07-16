@@ -196,6 +196,12 @@ Welcome to the MySQL monitor.  Commands end with ; or \g.
 
 When prompted, enter the password used when creating the Secret.
 
+## Or Run
+```kubectl -n mysql-operator patch svc mysql-cluster \
+  -p '{"spec":{"type":"LoadBalancer"}}'```
+to make sure the mysql-cluster to bind to k3d loadbalancer.
+```k3d cluster create demo --api-port 6550 --servers 1 --agents 4 --port 8080:80@loadbalancer --port 33006:3306@loadbalancer --wait```
+
 ## More Information
 
 Refer to the official documentation at:
